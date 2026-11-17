@@ -42,8 +42,35 @@ public class ArgumentSwitcher {
                 JsonArray starshipresults = jsonObject.getAsJsonArray("results");
                 printer.printDetailsStarships(starshipresults);
                 break;
+            case "people":
+                jsonObject = repository.getAll("people", searchquery);
+                if (jsonObject == null) {
+                    System.out.println("Could not get the people, check your internet connection.");
+                    return;
+                }
+                JsonArray peopleresults = jsonObject.getAsJsonArray("results");
+                printer.printDetailsPeople(peopleresults);
+                break;
+            case "vehicles":
+                jsonObject = repository.getAll("vehicles", searchquery);
+                if (jsonObject == null) {
+                    System.out.println("Could not get the vehicles, check your internet connection.");
+                    return;
+                }
+                JsonArray vehicleresults = jsonObject.getAsJsonArray("results");
+                printer.printDetailsVehicles(vehicleresults);
+                break;
+            case "species":
+                jsonObject = repository.getAll("species", searchquery);
+                if (jsonObject == null) {
+                    System.out.println("Could not get the species, check your internet connection.");
+                    return;
+                }
+                JsonArray speciesresults = jsonObject.getAsJsonArray("results");
+                printer.printDetailsSpecies(speciesresults);
+                break;
             default:
-                System.out.println(command + " is not an available command, available commands: films, planets, starships");
+                System.out.println(command + " is not an available command, available commands: films, planets, starships, people, vehicles, species");
                 break;
         }
     }

@@ -1,8 +1,9 @@
 # StarWarsAPI
 
 A Java console client for the [SWAPI](https://swapi.dev/) (Star Wars API).
-Search films, planets and starships from the terminal, with all their related
-entities (characters, residents, pilots...) resolved automatically.
+Search films, planets, starships, people, vehicles and species from the
+terminal, with all their related entities (characters, residents, pilots...)
+resolved automatically.
 
 > This is a fork of [maartendekker1998/StarWarsAPI](https://github.com/maartendekker1998/StarWarsAPI)
 > with several fixes — see [Changes vs. the original repository](#changes-vs-the-original-repository).
@@ -64,6 +65,9 @@ Syntax:
 | `films` | title | `films hope` |
 | `planets` | name | `planets naboo` |
 | `starships` | name, model | `starships death star` |
+| `people` | name | `people luke` |
+| `vehicles` | name, model | `vehicles at` |
+| `species` | name | `species wookie` |
 
 - **Category names are case-insensitive** (`Films`, `PLANETS`... work too).
 - **Searches may contain spaces and accents** (`starships death star`, `planets padmé`).
@@ -125,6 +129,11 @@ at commit `0cb937a`:
    and `test` as source folders and the jars in `src/libs` as referenced
    libraries, so the Java extension compiles and runs the project correctly
    out of the box.
+7. **Full API coverage** (this branch) — the original only supported the
+   `films`, `planets` and `starships` categories. `people`, `vehicles` and
+   `species` were added as first-class commands with their own detailed output,
+   including single-URL relations (a person's homeworld, a species' homeworld)
+   and the special cases SWAPI returns (`"unknown"` / `"n/a"`, null homeworld).
 
 ## Credits
 

@@ -141,6 +141,153 @@ public class Printer {
         }
     }
 
+    public void printDetailsPeople(JsonArray peopleResults) {
+        if (peopleResults.size() != 0)
+            for (int i = 0; i < peopleResults.size(); i++) {
+
+                JsonObject person = peopleResults.get(i).getAsJsonObject();
+
+                System.out.println("Name : " + person.get("name"));
+                System.out.println("Height : " + person.get("height"));
+                System.out.println("Mass : " + person.get("mass"));
+                System.out.println("Hair color : " + person.get("hair_color"));
+                System.out.println("Skin color : " + person.get("skin_color"));
+                System.out.println("Eye color : " + person.get("eye_color"));
+                System.out.println("Birth year : " + person.get("birth_year"));
+                System.out.println("Gender : " + person.get("gender"));
+
+                //the homeworld is a single url instead of an array
+                JsonArray homeworld = new JsonArray();
+                homeworld.add(person.get("homeworld"));
+                System.out.println("");
+                System.out.println("Homeworld :");
+                System.out.println("");
+                printSubCall("name", homeworld);
+                System.out.println("");
+
+                JsonArray films = person.getAsJsonArray("films");
+                System.out.println("");
+                System.out.println("Films :");
+                System.out.println("");
+                printSubCall("title", films);
+                System.out.println("");
+
+                JsonArray species = person.getAsJsonArray("species");
+                System.out.println("");
+                System.out.println("Species :");
+                System.out.println("");
+                printSubCall("name", species);
+                System.out.println("");
+
+                JsonArray vehicles = person.getAsJsonArray("vehicles");
+                System.out.println("");
+                System.out.println("Vehicles :");
+                System.out.println("");
+                printSubCall("name", vehicles);
+                System.out.println("");
+
+                JsonArray starships = person.getAsJsonArray("starships");
+                System.out.println("");
+                System.out.println("Starships :");
+                System.out.println("");
+                printSubCall("name", starships);
+                System.out.println("");
+
+                System.out.println("");
+                System.out.println("");
+            }
+        else {
+            System.out.println("Your search didn't get any results");
+        }
+    }
+
+    public void printDetailsVehicles(JsonArray vehicleResults) {
+        if (vehicleResults.size() != 0)
+            for (int i = 0; i < vehicleResults.size(); i++) {
+
+                JsonObject vehicle = vehicleResults.get(i).getAsJsonObject();
+
+                System.out.println("Name : " + vehicle.get("name"));
+                System.out.println("Model : " + vehicle.get("model"));
+                System.out.println("Manufacturer : " + vehicle.get("manufacturer"));
+                System.out.println("Cost in credits : " + vehicle.get("cost_in_credits"));
+                System.out.println("Length : " + vehicle.get("length"));
+                System.out.println("Max Atmosphering Speed : " + vehicle.get("max_atmosphering_speed"));
+                System.out.println("Crew : " + vehicle.get("crew"));
+                System.out.println("Passengers : " + vehicle.get("passengers"));
+                System.out.println("Cargo Capacity : " + vehicle.get("cargo_capacity"));
+                System.out.println("Consumables : " + vehicle.get("consumables"));
+                System.out.println("Vehicle Class : " + vehicle.get("vehicle_class"));
+
+                JsonArray pilots = vehicle.getAsJsonArray("pilots");
+                System.out.println("");
+                System.out.println("Pilots :");
+                System.out.println("");
+                printSubCall("name", pilots);
+                System.out.println("");
+
+                JsonArray films = vehicle.getAsJsonArray("films");
+                System.out.println("");
+                System.out.println("Films :");
+                System.out.println("");
+                printSubCall("title", films);
+                System.out.println("");
+            }
+        else {
+            System.out.println("Your search didn't get any results");
+        }
+    }
+
+    public void printDetailsSpecies(JsonArray speciesResults) {
+        if (speciesResults.size() != 0)
+            for (int i = 0; i < speciesResults.size(); i++) {
+
+                JsonObject species = speciesResults.get(i).getAsJsonObject();
+
+                System.out.println("Name : " + species.get("name"));
+                System.out.println("Classification : " + species.get("classification"));
+                System.out.println("Designation : " + species.get("designation"));
+                System.out.println("Average Height : " + species.get("average_height"));
+                System.out.println("Skin Colors : " + species.get("skin_colors"));
+                System.out.println("Hair Colors : " + species.get("hair_colors"));
+                System.out.println("Eye Colors : " + species.get("eye_colors"));
+                System.out.println("Average Lifespan : " + species.get("average_lifespan"));
+                System.out.println("Language : " + species.get("language"));
+
+                //the homeworld is a single url instead of an array, it can also be null for unknown origins
+                JsonElement homeworldElement = species.get("homeworld");
+                if (homeworldElement != null && !homeworldElement.isJsonNull()) {
+                    JsonArray homeworld = new JsonArray();
+                    homeworld.add(homeworldElement);
+                    System.out.println("");
+                    System.out.println("Homeworld :");
+                    System.out.println("");
+                    printSubCall("name", homeworld);
+                } else {
+                    System.out.println("");
+                    System.out.println("Homeworld : unknown");
+                }
+                System.out.println("");
+
+                JsonArray people = species.getAsJsonArray("people");
+                System.out.println("");
+                System.out.println("People :");
+                System.out.println("");
+                printSubCall("name", people);
+                System.out.println("");
+
+                JsonArray films = species.getAsJsonArray("films");
+                System.out.println("");
+                System.out.println("Films :");
+                System.out.println("");
+                printSubCall("title", films);
+                System.out.println("");
+            }
+        else {
+            System.out.println("Your search didn't get any results");
+        }
+    }
+
     //prints the underlying api calls in the array of the original call.
     private void printSubCall(String entity, JsonArray jsonArray) {
         if (jsonArray.size() != 0) {

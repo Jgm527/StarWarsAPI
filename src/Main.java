@@ -106,12 +106,15 @@ public class Main {
         System.out.println("For searching in results in a category");
         System.out.println("usage: [category]  [search]");
         System.out.println("");
-        System.out.println("[category] : films, planets, starships");
+        System.out.println("[category] : films, planets, starships, people, vehicles, species");
         System.out.println("[search] you can search on following fields per category");
         System.out.println("");
         System.out.println("films : title");
         System.out.println("planets : name");
         System.out.println("starships : name, model");
+        System.out.println("people : name");
+        System.out.println("vehicles : name, model");
+        System.out.println("species : name");
         System.out.println("");
     }
 }

@@ -8,6 +8,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class API {
 
@@ -17,9 +19,11 @@ public class API {
     public JsonObject getBuilder(String path, String searchquery) throws Exception {
         HttpGet httpGet;
         if (searchquery == null) {
-            httpGet = new HttpGet("https://swapi.co/api/" + path + "/");
+            httpGet = new HttpGet("https://swapi.dev/api/" + path + "/");
         } else {
-            httpGet = new HttpGet("https://swapi.co/api/" + path + "/?search=" + searchquery);
+            //the search must be url encoded, spaces or accents would break the request otherwise
+            String encodedSearch = URLEncoder.encode(searchquery, StandardCharsets.UTF_8).replace("+", "%20");
+            httpGet = new HttpGet("https://swapi.dev/api/" + path + "/?search=" + encodedSearch);
         }
         return getRequest(httpGet);
     }
